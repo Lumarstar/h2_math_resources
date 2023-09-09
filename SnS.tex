@@ -1,0 +1,1896 @@
+\documentclass[12pt, a4paper, titlepage]{article}
+\usepackage{titling}
+\usepackage{amsfonts}
+\usepackage{parskip}
+\usepackage{outlines}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+
+\title{H2 Mathematics - Sequences and Series}
+\author{Tew En Hao}
+\date{July - September 2023}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Concepts}
+
+Here, we assume at least fundamental knowledge about the topic, hence our focus will be more on applying said knowledge. In this section, we provide a brief recap of the required concepts and formulae.
+
+\subsection{Definitions}
+
+Not the most important thing here, but we still will touch on it:
+
+\begin{outline}[enumerate]
+    \1 A \emph{sequence} is a set of terms or numbers in a defined order. It is often written as $u_1, u_2, \dots, u_r, \dots$ where $u_r$ is the $r^{th}$ term (or general term)
+
+        \2 A \emph{finite} sequence is one that has a last term, ie. a finite number of terms.
+
+        \2 A \emph{infinite} sequence is one that does not have a last term, ie. an infinite number of terms.
+
+        \2 Sequences can be defined \emph{recursively} or \emph{directly}. Examples of recursive definitions are $u_n = u_{n-1} + u_{n-2}$, where the $n^{th}$ term depends on previous terms. Examples of direct definitions are $u_n = 3n^2 + 5n + 2$. Such definitions do not depend on previous terms.
+
+    \1 A \emph{series} is formed when the terms of a sequence are added and it can either be finite or infinite. It is often written as $u_1 + u_2 + u_3 + \dots + u_r + \dots$ for a general term $u_r$. \emph{Finite} and \emph{infinite} series are similar to their sequence counterparts.
+\end{outline}
+
+\subsection{Formulas}
+
+There are two that are extremely important.
+
+First is the formula for the sum of an \emph{arithmetic} series up till the $n^{th}$ term. If the arithmetic series has a first term $u_1 = a$ and a common difference $d$, then the sum up to the $n^{th}$ term $S_n$ is given by:
+
+\begin{equation*}
+    S_n = \frac{n}{2}[2a + (n-1)d]
+\end{equation*}
+
+\underline{Derivation}:
+
+\begin{align}
+    S_n &= a + (a + d) + (a + 2d) + \dots + (a + (n-1)d) \\
+    S_n &= (a + (n-1)d) + (a + (n-2)d) + (a + (n-3)d) + \dots + a
+\end{align}
+
+(1) + (2):
+
+\begin{align}
+    2S_n &= n[2a + (n-1)d] \\
+    S_n &= \frac{n}{2}[2a + (n-1)d]
+\end{align}
+
+and we are done with our derivation.
+
+Second is the formula for the sum of a \emph{geometric} series up till the $n^{th}$ term. If the geometric series has a first term $u_1 = a$ and a common ratio $r$, then the sum up to the $n^{th}$ term $S_n$ is given by:
+
+\begin{equation*}
+    S_n = \frac{a(r^n - 1)}{r - 1}, r > 1
+\end{equation*}
+
+or
+
+\begin{equation*}
+    S_n = \frac{a(1 - r^n)}{1 - r}, r < 1
+\end{equation*}
+
+For an infinite geometric series, if $|r| < 1$, the series converges, and the sum to infinity is given by
+
+\begin{equation*}
+    S_n = \frac{a}{1-r}
+\end{equation*}
+
+\underline{Derivation:}
+
+\begin{align}
+    S_n &= a + ar + ar^2 + ar^3 + \dots + ar^{n-1} \\
+    rS_n &= ar + ar^2 + ar^3 + ar^4 + \dots + ar^n
+\end{align}
+
+(6) - (5):
+
+\begin{align}
+    (r-1)S_n &= ar^n - a \\
+    S_n &= \frac{a(r^n - 1)}{r - 1}
+\end{align}
+
+and we are done with our derivation.
+
+Other miscellaneous formulas that are good to know:
+
+\begin{itemize}
+    \item If the $n^{th}$ term of a sequence is $u_n$ and the sum up to the $n^{th}$ term is $S_n$, then $u_n = S_n - S_{n-1}$
+    \item $\sum_{1}^{n} x = \frac{n(n+1)}{2}$
+    \item It is also useful to know some common Maclaurin Series expansions. (This however is optional and it's okay to not know them yet.) 
+\end{itemize}
+
+\section{Question Types}
+
+\subsection{Behaviours of Series/Sequences}
+
+We focus on two aspects of the behaviour of such series/sequences:
+
+\begin{enumerate}
+    \item Trend of the series/sequence, ie. whether it increases, or decreases.
+    \item Behaviour when the series/sequence tends to infinity.
+\end{enumerate}
+
+\textbf{\\ Example: Harmonic Series}
+
+The \emph{Harmonic Series} is the infinite series formed by summing all positive unit fractions, ie.
+
+\begin{align*}
+    \sum_1^{\infty} \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \dots
+\end{align*}
+
+If we treat each individual term as terms in a \emph{sequence}, where $u_n = \frac{1}{n}$, then we see that the sequence eventually \emph{converges} to $0$, and the terms decrease as $n$ increases.
+
+However, if we looked at the \emph{series} instead, the series actually \emph{diverges} as $n \rightarrow \infty$.
+
+\underline{Proof:}
+
+\begin{align*}
+    \sum_1^{\infty} \frac{1}{n} &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} + \dots \\
+    &\ge 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \dots \\
+    &= 1 + \frac{1}{2} + (\frac{1}{4} + \frac{1}{4}) + (\frac{1}{8} + \dots + \frac{1}{8}) + \dots \\
+    &= 1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} + \dots \\
+    &= \infty
+\end{align*}
+
+\textbf{\\ Example:}
+
+A sequence is defined by $u_1 = a, u_2 = b$, where a and b are constants, and
+\begin{equation*}
+    u_{n+2} = 2u_n + 3u_{n+1} - 10, \forall n > 0
+\end{equation*}
+\begin{enumerate}[label=(\alph*)]
+    \item Describe how the sequence behaves when a = 1 and b = 2. [2]
+    \item Find the values of a and b when $u_3 = 70$ and $u_4 = 20$ [3]
+\end{enumerate}
+
+\begin{flushright}
+    [Source: 2023 HCI JC1 Block Test]
+\end{flushright}
+
+\underline{Solution}
+
+a) We take a few terms of the sequence to see how it behaves:
+\begin{align*}
+    u_3 &= 2u_1 + 3u_2 - 10 \\
+    &= 2(1) + 3(2) - 10 \\
+    &= -2 \\ \\
+    u_4 &= 2u_2 + 3u_3 - 10 \\
+    &= 2(2) + 3(-2) - 10 \\
+    &= -12
+\end{align*}
+
+Since $u_4 < u_3 < 0$, this must mean that for $n \ge 5$, $u_n < 0$, and that $u_{n+1} < u_{n}$. Looking back at the two key aspects we want to focus on, we can see that:
+\begin{itemize}
+    \item The sequence decreases as $n$ increases
+    \item The sequence tends to negative infinity
+\end{itemize}
+
+b) Substitute the relevant values in:
+\begin{align*}
+    u_4 &= 2b + 3(70) - 10 = 2b + 200 = 20 \\
+    u_3 &= 2a + 3b - 10 = 70
+\end{align*}
+
+Solving the equations simultaneously, one gets $b = -90$ and $a = 175$.
+
+\subsection{Sum and Difference of Series}
+
+The key idea here is to realise that:
+
+\begin{align*}
+    \sum_a^b f(x) = \sum_1^b f(x) - \sum_1^{a-1} f(x)
+\end{align*}
+
+or in terms of $S_{a,b}$, $S_a$ and $S_b$, where $S_{a, b}$ is the sum of terms from the $a^{th}$ term to the $b^{th}$ term:
+
+\begin{align*}
+    S_{a, b} = S_b - S_{a - 1}
+\end{align*}
+
+then, we manipulate the terms here as we wish. Something to note here is that the last summation has an upper bound of $a - 1$ as opposed to $a$, as we are dealing with \emph{integers}.
+
+\textbf{\\ Example:}
+
+Given that $\sum_{r = 1}^N \frac{1}{r(r+1)} = 1 - \frac{1}{N+1}$, find $\sum_{r = 3}^{2N-1} \frac{1}{r(r+1)}$.
+
+\underline{Solution:}
+
+\begin{align*}
+    \sum_{r = 3}^{2N-1} \frac{1}{r(r+1)} &= \sum_{r = 1}^{2N-1} \frac{1}{r(r+1)} - \sum_{r = 1}^{2} \frac{1}{r(r+1)} \\
+    &= (1 + \frac{1}{2N - 1 + 1}) - (1 - \frac{1}{2 + 1}) \\
+    &= \frac{1}{3} + \frac{1}{2N}
+\end{align*}
+
+\subsection{Method of Differences}
+
+If the general term of a series $u_r$ can be written as a difference of two functions, written as $f(r + 1) - f(r)$, then:
+
+\begin{align*}
+    \sum_{r = 1}^n u_r &= \sum_{r = 1}^n [f(r + 1) - f(r)] \\
+    &= f(2) - f(1) \\
+    &+ f(3) - f(2) \\
+    &+ f(4) - f(3) \\
+    &+ \dots \\
+    &+ f(n + 1) - f(n) \\
+    &= f(n + 1) - f(1)
+\end{align*}
+
+However, it is not always this straightforward. Always keep your eyes peeled for possible cancellations.
+
+\textbf{\\ Example:}
+
+Verify that:
+\begin{align*}
+    \frac{1}{2x} - \frac{1}{x - 1} + \frac{1}{2(x - 2)} = \frac{1}{x(x - 1)(x - 2)}
+\end{align*}
+By using the above result, find
+\begin{align*}
+    \sum^N_{n = 3} \frac{1}{n(n - 1)(n - 2)}
+\end{align*}
+Hence show that
+\begin{align*}
+    \sum^N_{n = 1} \frac{1}{n^3} < \frac{11}{8}
+\end{align*}
+
+\begin{flushright}
+    [Source: HCI Sequences and Series Tutorial 1B Q6]
+\end{flushright}
+
+\underline{Solution:}
+
+\begin{align*}
+    \frac{1}{2x} - \frac{1}{x - 1} + \frac{1}{2(x - 2)} &= \frac{(x - 1)(x - 2) - 2x(x - 2) + x(x - 1)}{2x(x - 1)(x - 2)} \\
+    &= \frac{x^2 - 3x + 2 - 2x^2 + 4x + x^2 - x}{2x(x - 1)(x - 2)} \\
+    &= \frac{2}{2x(x - 1)(x - 2)} \\
+    &= \frac{1}{x(x - 1)(x - 2)}
+\end{align*}
+This part requires mastery over partial fractions. It is best if you can manage to complete this part, but if you are not able to, use the given result to solve the next part first.
+
+\begin{align*}
+    \sum^N_{n = 3} \frac{1}{n(n - 1)(n - 2)} &= \sum^N_{n = 3} \frac{1}{n(n - 1)(n - 2)} \\
+    &= \left[
+    \begin{array}{c}
+         \frac{1}{2(3)} - \frac{1}{3 - 1} + \frac{1}{2(3 - 2)} \\
+        + \frac{1}{2(4)} - \frac{1}{4 - 1} + \frac{1}{2(4 - 2)} \\
+        + \frac{1}{2(5)} - \frac{1}{5 - 1} + \frac{1}{2(5 - 2)} \\
+        + \frac{1}{2(6)} - \frac{1}{(6 - 1)} + \frac{1}{2(6 - 2)} \\
+        + \dots \\
+        + \frac{1}{2(N - 2)} - \frac{1}{N - 3} + \frac{1}{2(N - 4)} \\
+        + \frac{1}{2(N - 1)} - \frac{1}{N - 2} + \frac{1}{2(N - 3)} \\
+        + \frac{1}{2N} - \frac{1}{N - 1} + \frac{1}{2(N - 2)}
+    \end{array}
+    \right] \\
+    &= -\frac{1}{2} + \frac{1}{2} + \frac{1}{2(N - 1)} + \frac{1}{2N} - \frac{1}{N - 1} \\
+    &= \frac{1}{2N} - \frac{1}{2(N - 1)}
+\end{align*}
+Realise that there is a cancellation of terms that would simplify the eventual result. in this case, the cancellation is not as straightforward as $f(r - 1) - f(r)$, as it takes place "over multiple lines". Sometimes, these "lines" may not even be straight, they can be weird shapes.
+
+\subsection{"Flower Replacement"}
+
+See something similar? Use "flower replacement"! We usually replace $r$ in the summation with $r - k$, for some constant $k$.
+
+\textbf{\\ Example:}
+
+Consider:
+\begin{align*}
+    \sum^n_{r = 1} \frac{r^2 + 3r + 1}{(r + 2)!} = \frac{3}{2} - \frac{n + 3}{(n + 2)!}
+\end{align*}
+Find:
+\begin{align*}
+    \sum^n_{r = 1} \frac{r^2 + 5r + 5}{(r + 3)!}
+\end{align*}
+
+\underline{Solution:}
+
+\begin{align*}
+    \sum^n_{r = 1} \frac{r^2 + 5r + 5}{(r + 3)!} &= \sum^n_{r = 1} \frac{(r + 1)^2 + 3(r + 1) + 1}{((r + 1) + 2)!}
+\end{align*}
+Replace $r + 1$ with $k$ (ie $k = r + 1$):
+\begin{align*}
+    \sum^n_{r = 1} \frac{(r + 1)^2 + 3(r + 1) + 1}{((r + 1) + 2)!} &= \sum^{n + 1}_{k = 2} \frac{k^2 + 3k + 1}{(k + 2)!} \\
+    &= [\frac{3}{2} - \frac{n + 4}{(n + 3)!}] - [\frac{3}{2} - \frac{4}{6}] \\
+    &= \frac{2}{3} - \frac{n + 4}{(n + 3)!}
+\end{align*}
+
+\subsection{Identifying sequences and series}
+
+\subsubsection{Arithmetic sequences and series}
+
+If we recall the statement we use to declare an arithmetic sequence, there are two key characteristics that define an arithmetic sequence (or series):
+
+\begin{enumerate}
+    \item A first term, $a$
+    \item A \emph{non-zero constant} common difference, $d$
+\end{enumerate}
+
+These same two characteristics are what we look for when trying to identify an arithmetic sequence or series. If we are given some sequence $u_n = f(n)$, we check:
+
+\begin{enumerate}
+    \item $u_{n + 1} - u_n = \text{constant} \neq 0$.
+    \item The first term $u_1$ exists.
+\end{enumerate}
+
+Only when these two conditions are satisfied, then the sequence/series is an arithmetic sequence/series.
+
+\textbf{\\ Example:}
+
+Let $u_n$ denote the $n^{th}$ term of a sequence. Given that $u_1 = 1$ and $u_n = n^2 - n + 1$, prove that the sequence $\{u_n\}$ is not an arithmetic sequence.
+
+\underline{Solution:}
+
+\begin{align*}
+    u_{n + 1} - u_n &= [(n + 1)^2 - (n + 1) + 1] - [n^2 - n + 1] \\
+    &= [n^2 + 2n + 1 - n] - [n^2 - n + 1] \\
+    &= 2n
+\end{align*}
+
+Since $u_{n + 1} - u_n$ is dependent on $n$, it is \emph{not} a constant. Thus, the sequence $\{u_n\}$ does not have a constant common difference        and is not an arithmetic sequence.
+
+\subsubsection{Geometric sequences and series}
+
+Here we refer to the characteristics that define the geometric sequence/series:
+
+\begin{enumerate}
+    \item A \emph{non-zero} first term, $a$
+    \item A \emph{non-zero constant} common ratio, $r$
+\end{enumerate}
+
+Following the same reasoning as before, if we are given some sequence $u_n = f(n)$, for $\{u_n\}$ to be a geometric series:
+
+\begin{enumerate}
+    \item $u_{n + 1} / u_n = \text{constant} \neq 0$. (the slash is the division operator)
+    \item The first term $u_1$ exists, and is \emph{non-zero}. (because anything multiplied by 0 is 0, and that's not meaningful at all)
+\end{enumerate}
+
+Only when these two conditions are satisfied, will the sequence/series be a geometric sequence/series.
+
+\textbf{\\ Example:}
+
+Let $u_n$ denote the $n^{th}$ term of a sequence. Given that $u_1 = 1$ and $u_n = 3^{n - 1}$, prove that the sequence $\{u_n\}$ is a geometric sequence.
+
+\underline{Solution:}
+
+To show that $\{u_n\}$ is a geometric series, we need to find the ratio $\frac{u_{n + 1}}{u_n}$, which is the common ratio.
+\begin{align*}
+    \frac{u_{n + 1}}{u_n} &= \frac{3^{n}}{3^{n - 1}}
+    &= 3 \\
+    &= \text{constant (independent of } n \text{)}
+\end{align*}
+Since the first term exists and is non-zero (as $u_1 = 1$), and the common ratio is a non-zero constant, the series $\{u_n\}$ is a geometric series.
+
+\underline{Solution:}
+
+\subsection{Manipulating Terms and Sums}
+
+This section is really about making use of formulas. There is no clear-cut approach, and techniques are best illustrated through examples.
+
+\textbf{\\ Example:}
+
+A sequence is defined by:
+\begin{align*}
+    u_n = 15(3^n) - 3n + 2, \text{ for } n > 0
+\end{align*}
+Find the sum of the first $m$ terms.
+
+\begin{flushright}
+    [Source: 2023 HCI JC1 Block Test]
+\end{flushright}
+
+\underline{Solution:}
+
+\begin{align*}
+    \sum_1^m u_n &= \sum_1^m [15(3^n) - 3n + 2] \\
+    &= 15 \sum_1^m (3^n) - 3 \sum_1^m n + \sum_1^m 2 \\
+    &= 15(\frac{3(3^m - 1)}{3 - 1}) - 3(\frac{m}{2}(2 + m - 1)) + 2m \\
+    &= \frac{45(3^m - 1)}{2} - \frac{3m(m + 1)}{2} + 2m
+\end{align*}
+Here, we broke the sequence down into individual terms and found their sums separately via their respective formulas. The key idea here is to \emph{recognise the terms to apply the correct formulas.}
+
+\textbf{\\ Example:}
+
+The sum of the first $n$ terms of a series is given as:
+\begin{align*}
+    \frac{2n}{(n + 1)(n + 2)}, \text{ where } n \text{ is a positive integer.}
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+    \item Find an expression for the $n^{th}$ term of this series, giving your answer in the simplest form.
+    \item The sum of the first $p$ terms of this series is equal to $-\frac{49}{5}$ times the $p^{th}$ term of the series. Find the value of $p$.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: 2023 HCI JC1 Block Test]
+\end{flushright}
+
+\underline{Solution:}
+
+a) Letting $S_n$ denote the sum of the first $n$ terms of the series,
+\begin{align*}
+    n^{th} \text{ term of the series } &= S_n - S_{n - 1} \\
+    &= \frac{2n}{(n + 1)(n + 2)} - \frac{2(n - 1)}{n(n + 1)} \\
+    &= \frac{2n^2 - 2(n - 1)(n + 2)}{n(n + 1)(n + 2)} \\
+    &= \frac{4 - 2n}{n(n + 1)(n + 2)}
+\end{align*}
+
+b)
+\begin{align*}
+    S_p &= -\frac{49}{5} u_p, \text{ where } u_p \text{ is the } p^{th} \text{ term.} \\
+    \frac{2p}{(p + 1)(p + 2)} &= -\frac{49}{5} \frac{4 - 2p}{p(p + 1)(p + 2)} \\
+    10p^2 &= -49(4 - 2p) \\
+    10p^2 - 98p + 196 &= 0 \\
+    5p^2 - 49p + 98 &= 0 \\
+    (5p - 14)(p - 7) &= 0 \\
+    \implies p = \frac{14}{5} \text{ or } p &= 7 \\ \\
+    \text{Since } &p \text{ is an integer, then } p = 7
+\end{align*}
+Here, it is simply about applying the correct formulas and differentiating between $S_n$ and $u_n$.
+
+\subsection{Word Problems}
+
+I hate this section too. Here are some ways to relieve the pain of reading:
+
+\begin{enumerate}
+    \item Look out for key phrases, like "compound interest", that would hint towards the type of series we are dealing with (arithmetic or geometric)
+    \item Be very conscious about time. For example, which year does the plans start? When are the deposits made (start/end of the month)?
+    \item Find the pattern by listing out the equation day by day \emph{without simplifying it}. This will better help you see the pattern for the arithmetic/geometric series.
+    \item Use earlier parts of the question to help you. They really do.
+    \item More practice. It can't be helped, really.
+\end{enumerate}
+
+\textbf{\\ Example:}
+
+COVID-19 was an unprecedented crisis, causing widespread panic. Inflation is at an all-time high, and investing is now a hot topic amongst young adults who are coming of age, afraid that they might never be able to stand on their own two feet.
+
+John is one such young adult. He read that compound interest will really help in this economy, and has set aside \$3000 to start. The interest compiles yearly at 3\% per annum at the end of the year.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Find the amount of money John would have at the end of 3 years, assuming he does not take any money out.
+    \item Find the amount of money John would have at the end of $n$ years, expressed as $A(n)$.
+    \item At the end of the 3rd year, John received a promotion which takes effect from the start of the 4th year. He now puts an extra \$1000 into the account yearly before the total amount in the bank is compounded. Determine how much money John would have at the end of $n$ years now.
+\end{enumerate}
+
+\underline{Solution:}
+
+i)
+\begin{align*}
+    \text{Amount of money } &= 3000(1.03)^3 \\
+    &= 3278.18 \text{ (2dp)}
+\end{align*}
+
+ii)
+\begin{align*}
+    A(n) &= 3000(1.03)^n
+\end{align*}
+
+iii)
+Let $A(n)$ be the amount of money John has in the account at the end of the $n^{th}$ year.
+\begin{align*}
+    A(3) &= 3000(1.03^3) \text{ from (i)} \\
+    A(4) &= 3000(1.03^4) + 1000(1.03) \\
+    A(5) &= 3000(1.03^5) + 1000(1.03)^2 + 1000(1.03) \\
+    A(6) &= 3000(1.03^6) + 1000(1.03 + 1.03^2 + 1.03^3) \\
+    &\dots \\
+    A(n) &= 3000(1.03^n) + 1000(1.03 + 1.03^2 + \dots + 1.03^{n - 3}) \\
+    &= 3000(1.03^n) + \frac{1030(1.03^{n - 3} - 1)}{1.03 - 1} \\
+    &= 3000(1.03^n) + \frac{103000}{3}(1.03^{n - 3} - 1)
+\end{align*}
+Especially for part (iii), the key idea is to build the series term by term, by analysing what happens step by step. Listing out the terms in the above fashion can help show desired patterns.
+
+\section{Putting it all together}
+
+In an ideal world, these concepts would be tested individually. Alas, our reality is imperfect. Here are examples that show questions that require us to apply various concepts.
+
+% Examples are classified in subsections based on source
+% In each subsection try to push the word problems to the back
+% in a similar fashion to exams
+
+\subsection{NJC 2010 Sequences and Series Notes}
+
+\textbf{\\ Example:}
+
+A sequence of positive numbers is given recursively by the relation:
+\begin{align*}
+    a_{n + 1} = \sqrt{\frac{7a_n + 9}{2}}, n = 1, 2, 3 \dots
+\end{align*}
+It is known that as $n \rightarrow \infty$, $a_n \rightarrow l$. Find the exact value of $l$.
+
+\begin{flushright}
+    [Source: NJC 2010 Sequences and Series Notes Example 1.7]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Section 2.1}
+
+As $n \rightarrow \infty$, $a_n \rightarrow l \implies a_{n + 1} \rightarrow l$
+\begin{align*}
+    a_{n + 1} &= \sqrt{\frac{7a_n + 9}{2}} \\
+    l &= \sqrt{\frac{7l + 9}{2}} \\
+    l^2 &- \frac{7l + 9}{2} \\
+    2l^2 - 7l - 9 &= 0 \\
+    (2l - 9)(l + 1) &= 0 \\
+    \implies l &= \frac{9}{2} \text{ or } l = -1 \text{ (rej. } \because l \ge 0 \text{)}
+\end{align*}
+
+\emph{We make use of the fact that when $n \rightarrow \infty$, $n$ is so large that an increment of $1$ does not make any difference. Also, $l \ge 0$ because $a_n$ is defined by a square root function, which only returns non-negative values. Refer to the graph $y = \sqrt{x}$ if you need visuals.}
+
+\textbf{\\ Example:}
+
+Evaluate this series, simplifying your answer as far as possible:
+\begin{align*}
+    \sum_{i = 1}^{n} \log_a (2a^i)
+\end{align*}
+
+\begin{flushright}
+    [Source: NJC 2010 Sequences and Series Tutorial Q1c]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Section 1.2}
+
+\begin{align*}
+    \sum_{i = 1}^{n} \log_a (2a^i) &= \sum_{i = 1}^{n} [\log_a 2 + i \log_a a] \\
+    &= n \log_a 2 + \frac{n(n + 1)}{2}
+\end{align*}
+
+\emph{This question highlights the importance of the groundwork that is laid before H2 concepts - Logarithms for example. Be familiar with them, they are your friend.}
+
+\textbf{\\ Example:}
+
+Given that
+\begin{align*}
+    \sum_{r = 1}^n r^2 = \frac{n(n + 1)(2n + 1)}{6}
+\end{align*}
+Find:
+\begin{enumerate}[label=(\roman*)]
+    \item $1^2 + 2^2 + 3^2 + \dots + (2n)^2$
+    \item $2^2 + 4^2 + 6^2 + \dots + (2n)^2$
+\end{enumerate}
+Hence, find $1^2 + 3^2 + 5^2 + \dots + (2n - 1)^2$
+
+\begin{flushright}
+    [Source:  NJC 2010 Sequences and Series Tutorial Q3]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 1.2, 2.2}
+
+i)
+\begin{align*}
+    1^2 + 2^2 + 3^2 + \dots + (2n)^2 &= \sum_{r = 1}^{2n} r^2 \\
+    &= \frac{2n(2n + 1)(4n + 1)}{6} \\
+    &= \frac{n(2n + 1)(4n + 1)}{3}
+\end{align*}
+
+ii)
+\begin{align*}
+    2^2 + 4^2 + 6^2 + \dots + (2n)^2 &= 2^2(1^2) + 2^2(2^2) + 2^2(3^2) + \dots + 2^2(n^2) \\
+    &= 4 \sum_{r = 1}^n r^2 \\
+    &= \frac{2n(n + 1)(2n + 1)}{3}
+\end{align*}
+
+\emph{A little ingenuity is needed.}
+
+Hence,
+\begin{align*}
+    1^2 + 3^2 + \dots + (2n - 1)^2 &= (1^2 + 2^2 + \dots + (2n)^2) - (2^2 + 4^2 + \dots + (2n)^2) \\
+    &= \sum_{r = 1}^{2n} r^2 - 4 \sum_{r = 1}^n r^2 \\
+    &= \frac{n(2n + 1)(4n + 1)}{3} - \frac{2n(n + 1)(2n + 1)}{3} \\
+    &= \frac{n(2n + 1)(4n + 1 - 2n - 2)}{3} \\
+    &= \frac{n(2n - 1)(2n + 1)}{3}
+\end{align*}
+
+\emph{Trivial with the results of the previous two parts.}
+
+\textbf{\\ Example:}
+
+The positive numbers $x_n$ satisfy the relation
+\begin{align*}
+    x_{n + 1} = (x_n + 5)^{\frac{1}{2}}, \text{ for } n = 1, 2, 3, \dots
+\end{align*}
+As $n \rightarrow \infty$, $x_n \rightarrow l$
+\begin{enumerate}[label=(\roman*)]
+    \item Find (in either order) the value of $l$ to 3 decimal places and the exact value of $l$
+    \item  Prove that $(x_{n + 1})^2 - l^2 = x_n - l$
+    \item Hence show that if $x_n > l$, then $x_n > x_{n + 1} > l$
+\end{enumerate}
+
+\begin{flushright}
+    [Source: NJC 2010 Sequences and Series Tutorial Q9]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in the first example of this section}
+
+i)
+As $n \rightarrow \infty$, $x_n \rightarrow l \implies x_{n + 1} \rightarrow l$
+\begin{align*}
+    l &= (l + 5)^\frac{1}{2} \\
+    l^2 - l - 5 &= 0 \\
+    \implies l &= \frac{1 \pm \sqrt{21}}{2} \\
+    \implies l &= \frac{1 + \sqrt{21}}{2} \text{ } (\because x_n > 0) \\
+    &= 2.791 \text{ (3dp)}
+\end{align*}
+
+ii)
+\begin{align*}
+    (x_{n + 1})^2 - l^2 &= x_n + 5 - l^2 \\
+    &= x_n + 5 - \frac{22 + 2\sqrt{21}}{4} \\
+    &= x_n + \frac{20 - 22 + 2\sqrt{21}}{4} \\
+    &= x_n + \frac{-1 + \sqrt{21}}{2} \\
+    &= x_n - l
+\end{align*}
+
+iii)
+\begin{align*}
+    x_n > l &\implies x_n - l > 0 \\
+    &\implies (x_{n + 1})^2 - l^2 = (x_{n + 1} - l)(x_{n + 1} + l) > 0 \\
+    &\implies (x_{n + 1} - l) > 0 \text{ } (\because x_{n + 1} + l > 0) \implies x_{n + 1} > l
+\end{align*}
+Then,
+\begin{align*}
+    x_n - x_{n + 1} &= (x_{n + 1})^2 - l^2 + l - x_{n + 1} \\
+    &= (x_{n + 1} - l)(x_{n + 1} + l) - (x_{n + 1} - l) \\
+    &= (x_{n + 1} - l)(x_{n + 1} + l - 1) \\
+    &> 0 \text{ }(\because x_{n + 1} > l \implies x_{n + 1} + l > 2l > 1) \\
+    &\implies x_n > x_{n + 1}
+\end{align*}
+Thus, $x_n > l \implies x_n > x_{n + 1} > l$
+
+\emph{Working backwards helps a lot here, especially when trying to prove $x_n > x_{n + 1}$. $x_n - x_{n + 1} > 0$ was the main guiding principle behind this solution. If you encounter such questions in the exam, don't spend too long on them. Move on if you are stuck. There are likely more marks further down the road.}
+
+\textbf{\\ Example:}
+
+The numbers $x_n$ satisfy the relation
+\begin{align*}
+    x_{n + 1} = \frac{12}{7 - x_n}
+\end{align*}
+for all positive integers $n$. And, as $n \rightarrow \infty$, $x_n \rightarrow s$.
+\begin{enumerate}[label=(\roman*)]
+    \item Find the exact value(s) of $s$
+    \item Show that if $3 < x_n < 4$, then $x_{n + 1} < x_n$
+\end{enumerate}
+
+\begin{flushright}
+    [Source: NJC 2010 Sequences and Series Tutorial Q10]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in the previous example.}
+
+i)
+As $n \rightarrow \infty$, $x_n \rightarrow l \implies x_{n + 1} \rightarrow l$
+\begin{align*}
+    s &= \frac{12}{7 - s} \\
+    7s - s^2 &= 12 \\
+    s^2 - 7s + 12 &= 0 \\
+    \implies s &= 3 \text{ or } s = 4
+\end{align*}
+
+ii)
+\begin{align*}
+    x_{n + 1} - x_n &= \frac{12}{7 - x_n} - x_n \\
+    &= \frac{12 - 7x_n + (x_n)^2}{7 - x_n} \\
+    &= \frac{(x_n - 3)(x_n - 4)}{7 - x_n} < 0 \text{ } (\because 3 < x_n < 4)
+\end{align*}
+Thus, $x_{n + 1} < x_n$.
+
+\emph{Algebraic foundations must be strong.}
+
+\textbf{\\ Example:}
+
+The two roots of the equation $e^x - 3x = 0$ are denoted by $a$ and $b$, where $a < b$.
+\begin{enumerate}[label=(\roman*)]
+    \item Find the values of $a$ and $b$, each correct to 3 decimal places.
+\end{enumerate}
+A sequence of real numbers $x_1, x_2, x_3. \dots $ satisfies the recurrence relation,
+\begin{align*}
+    x_{n + 1} = \frac{1}{3}e^{x_n} \text{ for } n \ge 1
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Prove algebraically that, if the sequence converges, then it converges to either $a$ or $b$.
+    \item Use the GC to determine the behaviour of the sequence for each of the cases $x_1 = 0$, $x_1 = 1$ and $x_1 = 2$
+    \item By considering $x_n - x_{n + 1}$, prove that
+\end{enumerate}
+\begin{align*}
+    &x_n > x_{n + 1} \text{ if } a < x_n < b \\
+    &x_n < x_{n + 1} \text{ if } x_n < a \text{ or } x_n > b
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item State briefly how the results in part (iv) relate to the behaviours determined in part (iii).
+\end{enumerate}
+
+\begin{flushright}
+    [Source: NJC 2010 Sequences and Series Tutorial Q11]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in previous examples.}
+
+i)
+Using the GC, $a = 0.619$ (3dp) and $b = 1.512$ (3dp)
+
+\emph{Remember to show proof by sketching the graph.}
+
+ii)
+Let $l$ be the limiting value of the sequence, ie. $x_n \rightarrow l$ as $n \rightarrow \infty$.
+\begin{align*}
+    l &= \frac{1}{3}e^l \\
+    e^l - 3l &= 0 \\
+    \implies l &= a \text{ or } l = b
+\end{align*}
+
+\emph{As shown in the last few examples, the concept of a limiting value is important here.}
+
+iii) \\
+\begin{minipage}{0.3\textwidth}
+    \begin{tabular}{c|c}
+        n & $x_n$ \\
+        \hline
+        1 & 0 \\
+        \hline
+        2 & $\frac{1}{3}$ \\
+        \hline
+        3 & 0.4652 \\
+        \hline
+        11 & 0.6163 \\
+        \hline
+        15 & 0.6187 \\
+        \hline
+        19 & 0.619 \\
+        \hline
+        20 & 0.619
+    \end{tabular}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+    Using the GC, we observe that the sequence \emph{increases} to the limiting value of $a = 0.619$ when $x_n = 0$.
+\end{minipage}
+
+\begin{minipage}{0.3\textwidth}
+    \begin{tabular}{c|c}
+        n & $x_n$ \\
+        \hline
+        1 & 1 \\
+        \hline
+        2 & 0.0961 \\
+        \hline
+        3 & 0.8249 \\
+        \hline
+        11 & 0.625 \\
+        \hline
+        15 & 0.6199 \\
+        \hline
+        19 & 0.6192 \\
+        \hline
+        20 & 0.6191
+    \end{tabular}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+    Using the GC, we observe that the sequence \emph{decreases} to the limiting value of $a = 0.619$ when $x_n = 1$.
+\end{minipage}
+
+\begin{minipage}{0.3\textwidth}
+    \begin{tabular}{c|c}
+        n & $x_n$ \\
+        \hline
+        1 & 2 \\
+        \hline
+        2 & 2.463 \\
+        \hline
+        3 & 3.913 \\
+        \hline
+        4 & 16.690
+    \end{tabular}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+    Using the GC, we observe that the sequence \emph{increases} and \emph{diverges} when $x_n = 2$.
+\end{minipage}
+
+\emph{Show evidence, but if the GC keeps crashing just show a few values through manual calculation which should be enough to prove divergence.}
+
+\emph{Intuitively actually, one can guess the range of value of $a$ and $b$ will take based off the values of $x_n$ that were given. $a$ will likely be between $0$ and $1$, and $b$ will likely be between $1$ and $2$}
+
+iv)
+\begin{align*}
+    x_n - x_{n + 1} &= x_n - \frac{1}{3}e^{x_n} \\
+    &= \frac{1}{3}(3x_n - e^{x_n}) \\
+    &= -\frac{1}{3}(e^{x_n} - 3x_n)
+\end{align*}
+Realise that
+\begin{align*}
+    e^{x_n} - 3x_n < 0 \text{ when } a < x_n < b \implies x_n - x_{n + 1} > 0 \implies x_n > x_{n + 1} \\
+    e^{x_n} - 3x_n > 0 \text{ when } x_n < a \text{ or } x_n > b \implies x_n - x_{n + 1} < 0 \implies x_n < x_{n + 1}
+\end{align*}
+
+\emph{Sketch a graph of $y = e^{x_n} - 3x_n$ to show evidence. But, I'm not going to do that here because I have no idea how to on Latex oops-}
+
+v)
+When $x_n = 0 < a$ and $x_n = 2 > b$, the sequences increased, ie $x_n < x_{n + 1}$. On the other hand, when $a < x_n = 1 < b$. the sequence decreased, ie $x_n > x_{n + 1}$.
+
+\emph{Relatively simple question compared to the rest, you just need to link both parts together.}
+
+\textbf{\\ Example:}
+
+Express
+\begin{align*}
+    \frac{2}{x(x - 1)(x - 2)}
+\end{align*}
+in partial fractions.
+
+By using the above result, show that
+\begin{align*}
+    \sum_{n = 3}^N \frac{1}{n^3} \leq \frac{1}{4} - \frac{1}{2N(N - 1)}.
+\end{align*}
+
+Hence, find $a$ and $b$ such that
+\begin{align*}
+    \sum_{n = 1}^\infty \frac{1}{n^3} \leq 1 + \frac{b}{a^b}
+\end{align*}
+
+\begin{flushright}
+    [Source: NJC 2010 Sequences and Series Challenging Question Q1]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Section 2.3}
+
+For some constants $A$, $B$, $C$,
+\begin{align*}
+    \frac{2}{x(x - 1)(x - 2)} &= \frac{A}{x} + \frac{B}{x - 1} + \frac{C}{x - 2} \\
+    &= \frac{A(x - 1)(x - 2) + Bx(x - 2) + Cx(x - 1)}{x(x - 1)(x - 2)} \\
+\end{align*}
+\begin{align*}
+    \implies A(x - 1)(x - 2) + Bx(x - 2) + Cx(x - 1) &= 2 \\
+    (A + B + C)x^2 + (-3A -2B - C)x + 2A &= 2 \\
+    \begin{cases}
+        A + B + C &= 0 \\
+        3A + 2B + C &= 0 \\
+        2A &= 2
+    \end{cases}
+    \implies A = 1; B = -2, C &= 1
+\end{align*}
+Thus,
+\begin{align*}
+    \frac{2}{x(x - 1)(x - 2)} = \frac{1}{x} - \frac{2}{x - 1} + \frac{1}{x - 2}
+\end{align*}
+
+Now realise that
+\begin{align*}
+        n^3 &\ge n(n - 1)(n - 2) \text{ for positive } n. \\
+        \implies \frac{1}{n^3} &\leq \frac{1}{n(n - 1)(n - 2)} \\
+        \implies \sum_{n = 3}^{N} \frac{1}{n^3} &\leq \sum_{n = 3}^{N} \frac{1}{n(n - 1)(n - 2)} \\
+        &= \frac{1}{2} \sum_{n = 3}^{N} \frac{2}{n(n - 1)(n - 2)} \\
+        &= \frac{1}{2} \left[
+        \begin{array}{c}
+            \frac{1}{3} - \frac{2}{2} + \frac{1}{1} \\
+            + \frac{1}{4} - \frac{2}{3} + \frac{1}{2} \\
+            + \frac{1}{5} - \frac{2}{4} + \frac{1}{3} \\
+            + \frac{1}{6} - \frac{2}{5} + \frac{1}{4} \\
+            + \dots \\
+            + \frac{1}{N - 2} - \frac{2}{N - 3} + \frac{1}{N - 4} \\
+            + \frac{1}{N - 1} - \frac{2}{N - 2} + \frac{1}{N - 3} \\
+            + \frac{1}{N} - \frac{2}{N - 1} + \frac{1}{N - 2} \\
+        \end{array}
+        \right] \\
+        &= \frac{1}{2}(\frac{1}{2} + \frac{1}{N} - \frac{1}{N - 1}) \\
+        &= \frac{1}{4} - \frac{1}{2N(N - 1)}
+\end{align*}
+
+\emph{The key observation of the question is to see the first line here. With that, everything else falls into place.}
+
+As $N \rightarrow \infty$, $\frac{1}{2N(N - 1)} \rightarrow 0$.
+\begin{align*}
+    \sum_{n = 1}^\infty \frac{1}{n^3} &= 1 + \frac{1}{8} + \sum_{n = 1}^\infty \frac{1}{n^3} \\
+    &\leq 1 + \frac{1}{8} + \frac{1}{4} \\
+    &= 1 + \frac{5}{32} \\
+    &= 1 + \frac{5}{2^5} \implies a = 2; b = 5
+\end{align*}
+
+\subsection{HCI 2022 C1 CT1}
+
+\textbf{\\ Example:}
+
+Given that
+\begin{align*}
+    u_r = \frac{1}{1 + 2^r} \text{, where $r$ is a positive integer,}
+\end{align*}
+show that
+\begin{align*}
+    u_r - u_{r + 1} = \frac{2^r}{(1 + 2^r)(1 + 2^{r + 1})}
+\end{align*}
+\begin{enumerate}[label=(\roman*)]
+    \item Hence, show that
+\end{enumerate}
+\begin{align*}
+    &\sum_{r = 1}^n \frac{2^r}{(1 + 2^r)(1 + 2^{r + 1})} = A + \frac{B}{1 + 2^{n + 1}} \\
+    &\text{where $A$ and $B$ are constants to be determined.}
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Hence, state the behaviour of the sequence $A + \frac{B}{1 + 2^{n + 1}}$ as it converges to the exact value of 
+\end{enumerate}
+\begin{align*}
+    &\sum_{r = 1}^\infty \frac{2^r}{(1 + 2^r)(1 + 2^{r + 1})}
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Using your result in part (i), deduce
+\end{enumerate}
+\begin{align*}
+    \sum_{r = 3}^\infty \frac{2^r}{2(1 + 2^{r - 1})(1 + 2^r)}
+\end{align*}
+
+\begin{flushright}
+    [Source: HCI 2022 C1 CT1 Q4]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 2.1, 2.2, 2.3, 2.4}
+
+\begin{align*}
+    u_r - u_{r + 1} &= \frac{1}{1 + 2^r} - \frac{1}{1 + 2^{r + 1}} \\
+    &= \frac{1 + 2^{r + 1} - 1 - 2^r}{(1 + 2^r)(1 + 2^{r + 1})} \\
+    &= \frac{2^r}{(1 + 2^r)(1 + 2^{r + 1})}
+\end{align*}
+
+i)
+Hence,
+\begin{align*}
+    \sum_{r = 1}^n \frac{2^r}{(1 + 2^r)(1 + 2^{r + 1})} &= \sum_{r = 1}^n (\frac{1}{1 + 2^r} - \frac{1}{1 + 2^{r + 1}}) \\
+    &= \dots \text{ (work out the expansion)} \\
+    &= \frac{1}{1 + 2} - \frac{1}{1 + 2^{n + 1}} \\
+    &= \frac{1}{3} - \frac{1}{1 + 2^{n + 1}} \\
+    &\implies A = \frac{1}{3}; B = 1
+\end{align*}
+
+\emph{I don't have enough space to work the expansion out, but it is of the form $u_r - u_{r + 1}$ so it should be relatively straightforward to work out.}
+
+ii)
+As $n \rightarrow \infty$,
+\begin{align*}
+    \frac{1}{1 + 2^{r + 1}} \rightarrow 0
+    \implies \sum_{r = 1}^n \frac{2^r}{(1 + 2^r)(1 + 2^{r + 1})} \rightarrow \frac{1}{3}
+\end{align*}
+
+\begin{minipage}{0.3\textwidth}
+    \begin{tabular}{c|c}
+        n & $A + \frac{B}{1 + 2^{n + 1}}$ \\
+        \hline
+        9 & 0.3324 \\
+        \hline
+        10 & 0.3328 \\
+        \hline
+        11 & 0.3331 \\
+        \hline
+        12 & 0.3332 \\
+        \hline
+        13 & 0.3333 \\
+        \hline
+        14 & 0.3333 \\
+        \hline
+        15 & 0.3333
+    \end{tabular}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+    Using the GC, we observe that the sequence \emph{increases} to the limiting value of $\frac{1}{3}$.
+\end{minipage}
+
+\emph{Remember to show evidence to the marker that you know which terms tend to what value, as well as how you know the behaviour of the sequence.}
+
+iii)
+Using $k = r - 1$,
+\begin{align*}
+    \sum_{r = 3}^n \frac{2^r}{2(1 + 2^{r - 1})(1 + 2^r)} &= \sum_{r = 3}^n\frac{2^{r - 1}}{(1 + 2^{r - 1})(1 + 2^r)} \\
+    &= \sum_{k = 2}^{n - 1} \frac{2^k}{(1 + 2^k)(1 + 2^{k + 1})} \\
+    &= \sum_{k = 1}^{n - 1} \frac{2^k}{(1 + 2^k)(1 + 2^{k + 1})} - \frac{2}{(1 + 2)(1 + 4)} \\
+    &= \frac{1}{3} - \frac{1}{1 + 2^n} - \frac{2}{15} \\
+    &= \frac{1}{5} - \frac{1}{1 + 2^n}
+\end{align*}
+
+\textbf{\\ Example:}
+
+For a sequence $\{u_n\}$, it is given that
+\begin{align*}
+    S_n = u_1 + u_2 + \dots + u_n = \frac{5}{3}(5^{2n} - 1)
+\end{align*}
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that the sequence ${u_n}$ is a geometric progression.
+    \item Find $u_2 + u_4 + u_6 + \dots + u_{2n - 2} + u_{2n}$, giving your answer in a simplified form.
+\end{enumerate}
+
+A positive sequence $v_1, v_2, v_3 \dots$ is a geometric progression.
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Is the sequence $\ln v_1, \ln v_2, \ln v_3, \dots$ an arithmetic progression, a geometric progression or neither? Justify your answer briefly.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: HCI 2022 C1 CT1 Q5]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 2.5.2}
+
+i)
+\begin{align*}
+    u_n &= S_n - S_{n - 1} \\
+    &= \frac{5}{3}(5^{2n} - 1) - \frac{5}{3}(5^{2(n - 1)} - 1) \\
+    &= \frac{5^{2n + 1}}{3} - \frac{5^{2n - 1}}{3} \\
+    &= 8(5^{2n - 1})
+\end{align*}
+Letting the common ratio be $r$,
+\begin{align*}
+    r &= \frac{u_n}{u_{n - 1}} \\
+    &= \frac{8(5^{2n - 1})}{8(5^{2n - 3})} \\
+    &= 25 \text{ (which is a constant independent of } n \text{)}
+\end{align*}
+Thus, the sequence $\{u_n\}$ is a geometric progression.
+
+ii)
+\begin{align*}
+    u_2 + u_4 + \dots + u_{2n} &= 8(5^3 + 5^7 + \dots + 5^{4n - 1}) \\
+    &= \frac{8(5^3)(5^{4n} - 1)}{5^4 - 1} \\
+    &= \frac{1000(5^{4n} - 1)}{624} \\
+    &= \frac{125(5^{4n} - 1)}{78}
+\end{align*}
+
+\emph{Looks complicated but realise that it still is a geometric series.}
+
+iii)
+Let $v_n = ar^{n - 1}$, for constants $a, r$. Then,
+\begin{align*}
+    \ln v_n &= \ln a + (n - 1) \ln r \\
+    \implies \ln v_n - \ln v_{n - 1} &= (\ln a + (n - 1) \ln r) - \ln a + (n - 2) \ln r) \\
+    &= \ln r \text{ (constant that is independent of } n \text{)}
+\end{align*}
+Thus, the sequence is an arithmetic progression.
+
+\emph{Interesting question, but ultimately hinges on whether you are familiar with how to identify arithmetic/geometric sequences/series.}
+
+\textbf{\\ Example:}
+
+Tony deposits $x$ thousand dollars on 1 Jan 2021 into a new digital bank account which pays an interest rate of $0.5\%$ per month on the last day of each month. He puts a further \$$9000$ into the account on the first day of each subsequent month.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that the total amount of money (in thousands of dollars) in the account at the end of the third month is $1.005^3x + 18.1$, corrected to 1 decimal place.
+    \item Show that the total amount of money (in thousands of dollars) in the account at the end of the $n^{th}$ month, where Jan 2021 is the first month, is of the form $1.005^n(x + A) - B$, where $A$ and $B$ are positive integers to be determined.
+    \item Determine the least value of $x$, correct to 1 decimal place, for Tony to save at least \$$600000$ at the end of December 2024.
+\end{enumerate}
+Tony decides to try another means of investment. He deposits a single small sum of \$$1000$ into a cryptocurrency account at the start of January 2021. Based on a simulated model, it is estimated that the amount residing in the account at the start of the $n^{th}$ month, denoted by $A_n$, is given by the relationship
+\begin{align*}
+    A_n = 350(-0.05)^{n - 1} + 650(1.01)^{n - 1} + 100 \sin ((n - 1)\frac{\pi}{2})
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Without using any calculator, explain if the sequence $A_n$ converges or diverges or neither.
+\end{enumerate}
+Tony decides to close the cryptocurrency account once he makes a loss of beyond $40\%$ of his initial invested account.
+\begin{enumerate}[resume, label=(\roman*)]
+    \item When will be the earliest time for him to do so? Comment on the appropriateness of his decision at that point in time.
+\end{enumerate}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Section 2.1, 2.7}
+
+i)
+\begin{align*}
+    \text{Money at the end of the third month} &= 1.005^3x + 1.005^2(9) + 1.005(9) \\
+    &= 1.005^3x + 18.135225 \\
+    &= 1.005^3x + 18.1 \text{ (1dp)}
+\end{align*}
+
+\emph{Honestly more effort in showing you know your stuff could be shown here, through means like tables. If it's 1 mark don't bother, if it's worth 2 marks then show the amount of money at the end of the first, second and third months separately.}
+
+ii)
+Let $M(n)$ be the total amount of money (in thousands of dollars) in the account at the end of the $n^{th}$ month.
+\begin{align*}
+    M(n) &= 1.005^nx + 1.005^{n - 1}(9) + 1.005^{n - 2}(9) + \dots + 1.005(9) \\
+    &= 1.005^nx + \frac{9(1.005)(1.005^{n - 1} - 1)}{1.005 - 1} \\
+    &= 1.005^nx + 1809(1.005^{n - 1} - 1) \\
+    &= 1.005^nx + (1809)(\frac{1.005^n}{1.005}) - 1809 \\
+    &= 1.005^n(x + 1800) - 1809 \implies A = 1800; B = 1809
+\end{align*}
+
+\emph{Be careful when summing up the geometric series. Applying the formula blindly would lead to the fatal mistake of using $n$ rather than the correct $n - 1$.}
+
+iii)
+From 1 Jan 2021 to the end of December 2024, a total of $48$ months would have passed.
+\begin{align*}
+    M(48) &\ge 600 \\
+    1.005^{48}(x + 1800) - 1809 &\ge 600 \\
+    x + 1800 &\ge \frac{600 + 1809}{1.005^48} \\
+    x &\ge \frac{600 + 1809}{1.005^48} - 1800 = 96.1200723059 \\
+    \implies \text{ minimum } x &= 96.2 \text{ (1dp)}
+\end{align*}
+
+\emph{$M(n)$ is in thousands of dollars. So, instead of $600 000$, use $600$.}
+
+iv)
+When $n \rightarrow \infty$,
+\begin{align*}
+    &350(-0.05)^{n - 1} \rightarrow 0 \\
+    &650(1.01)^{n - 1} \rightarrow \infty \\
+    &100 \sin ((n - 1)\frac{\pi}{2}) \in [-100, 100]
+\end{align*}
+Thus, the sequence $A_n$ diverges.
+
+\emph{The trick here is to find out which is the most overpowering term. We need to account for the individual components containing $n$ -- whether they have a limit or bound.}
+
+v)
+For a loss beyond 40\% of the initial investment,
+\begin{align*}
+    350(-0.05)^{n - 1} + 650(1.01)^{n - 1} + 100 \sin ((n - 1)\frac{\pi}{2}) < 600
+\end{align*}
+
+\begin{minipage}{0.4\textwidth} % Adjust the width as needed
+    \begin{tabular}{c|c}
+        n & O(n) \\
+        \hline
+        3 & 663.94 \\
+        \hline
+        4 & 569.65 \\
+    \end{tabular}
+\end{minipage}
+\begin{minipage}{0.4\textwidth} % Adjust the width as needed
+    Tony should close the account at the start of April 2021.
+\end{minipage}
+
+This might be too early for Tony to see actual yields, as the amount of money in the account fluctuates according to the model. There is a potential for him to make a profit out of his investment if he holds out for longer.
+
+\emph{Smoke something reasonable.}
+
+\subsection{HCI Sequences and Series Supplementary Exercises}
+
+\textbf{\\ Example:}
+
+A geometric progression has first term $1$ and the common ratio $r$ is positive. The sum of the first 5 terms is twice the sum of terms from the $6^{th}$ to $15^{th}$ inclusive. Prove that:
+\begin{align*}
+    r^5 = \frac{1}{2}(\sqrt{3} - 1)
+\end{align*}
+
+\begin{flushright}
+    [Source: HCI Sequences and Series Supplementary Exercise Q4]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 1.2, 2.2}
+
+Let $S_n$ represent the sum of the first $n^{th}$ terms.
+\begin{align*}
+    S_5 &= 2(S_{15} - S_5) \\
+    3S_5 &= 2S_{15} \\
+    \frac{3(r^5 - 1)}{r - 1} &= \frac{2(r^{15} - 1)}{r - 1} \\
+    3r^5 - 3 &= 2(r^5)^3 - 2 \\
+    2(r^5)^3 - 3r^5 + 1 &= 0 \\
+    r &= 1 \text{ (rej. } r - 1 \neq 0 \text{), or} \\
+    r &= -\frac{1}{2}(\sqrt{3} + 1) \text{ (rej. } r > 0 \text{), or} \\
+    r &= \frac{1}{2}(\sqrt{3} - 1)
+\end{align*}
+
+\emph{$r \neq 1$ as that would mean the series is not a geometric series. This is the entire basis of the formula, which has a denominator $r - 1$}.
+
+\textbf{\\ Example:}
+
+The sum of the first $n$ terms of a series is given by the expression $(1 - 3^{-2n})$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Find $T_n$, the $n^{th}$ term of the series and hence show that the series is a geometric series.
+    \item Find the least value of $k$ such that the sum of the terms from the $k^{th}$ term is less than $\frac{1}{3000}$.
+    \item Express $\sum^N_{n = 1} \frac{1}{T_n}$ in terms of $N$.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: HCI Sequences and Series Supplementary Exercise Q11]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 1.2, 2.2, 2.5.2}
+
+i)
+Let $S_n$ be the sum of the first $n$ terms of the series, that is, $S_n = 1 - 3^{-2n}$.
+\begin{align*}
+    T_n &= S_n - S_{n - 1} \\
+    &= (1 - 3^{-2n}) - (1 - 3^{-2(n - 1)}) \\
+    &= 3^{-2(n - 1)} - 3^{-2n} \\
+    &= 3^{-2n}(9 - 1) \\
+    &= 8(3^{-2n})
+\end{align*}
+
+To show that it is a geometric series, we show that the common ratio $r$ is a constant that is independent of $n$.
+\begin{align*}
+    r &= \frac{T_n}{T_{n - 1}} \\
+    &= \frac{8(3^{-2n})}{8(3^{-2(n - 1)})} \\
+    &= \frac{3^{-2n}}{3^{-2n + 2}} \\
+    &= \frac{1}{9} \text{ (constant, independent of $n$)}
+\end{align*}
+
+Since $r$ is a constant that is independent of $n$, and $T_1 = \frac{8}{9}$ meaning the first term exists, the series is indeed a geometric series.
+
+\emph{Standard question. Do your homework and you should be fine!}
+
+ii)
+We let $S_{k, N}$ denote the sum from the $k^{th}$ term to the $N^{th}$ term.
+\begin{align*}
+    S_{k,N} &= S_N - S_{k - 1} \\
+    &= (1 - 3^{-2N}) - (1 - 3^{-2(k - 1)}) \\
+    &= 9(3^{-2k}) - 3^{-2N} < \frac{1}{3000}
+\end{align*}
+Here, we have to make an assumption that $N \rightarrow \infty$, if not it doesn't make sense to solve what we are told to solve for.
+\begin{align*}
+    \implies S_{k,\infty} = 9(3^{-2k}) &< \frac{1}{3000} \\
+    3^{-2k} &< \frac{1}{27000} \\
+    -2k \ln 3 &< \ln \frac{1}{27000} \\
+    k &> -\frac{\ln \frac{1}{27000}}{2 \ln 3} \\
+    \implies k &> 4.64385491143
+\end{align*}
+Thus, the least value of $k = 5$ ($k$ is a positive integer).
+
+\emph{Quite a bad question in my opinion. They should have specified if you should find the sum to infinity. I could very well assign $N$ to be any value. It's technically correct.}
+
+iii)
+\begin{align*}
+    \sum^N_{n = 1} \frac{1}{T_n} &= \sum^N_{n = 1} \frac{3^{2n}}{8} \\
+    &= \frac{1}{8} \sum^N_{n = 1} 3^{2n} \\
+    &= \frac{1}{8} \sum^N_{n = 1} 9^n \\
+    &= \frac{1}{8} \frac{9(9^N - 1)}{8} \\
+    &= \frac{9(9^N - 1)}{64}
+\end{align*}
+
+\emph{If $u_1, u_2, u_3, \dots$ forms a GP with common ratio $r$, then $\frac{1}{u_1}, \frac{1}{u_2}, \frac{1}{u_3}, \dots$ also forms a GP with common ratio $\frac{1}{r}$ and $a = \frac{1}{u_1}$}
+
+\textbf{\\ Example:}
+
+Let
+\begin{align*}
+    f(r) = \frac{1}{2 + sin r\theta}, \text{ where r is a positive integer and } 0 < \theta < \pi
+\end{align*}
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that
+\end{enumerate}
+\begin{align*}
+    f(r) - f(r + 2) = \frac{2\sin \theta \cos (r+1)\theta}{[2 + \sin r\theta][2 + \sin (r + 2)\theta]}
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Hence find, in terms of $n$ and $\theta$,
+\end{enumerate}
+\begin{align*}
+    \sum^n_{r = 1} \frac{\cos (r+1)\theta}{[2 + \sin r\theta][2 + \sin (r + 2)\theta]}
+\end{align*}
+
+\begin{flushright}
+    [Source: HCI Sequences and Series Supplementary Exercise Q23]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 2.3}
+
+i)
+\begin{align*}
+    f(r) - f(r + 2) &= \frac{1}{2 + \sin r\theta} - \frac{1}{2 + \sin (r + 2)\theta} \\
+    &= \frac{\sin (r + 2)\theta - \sin r\theta}{[2 + \sin r\theta][2 + \sin (r + 2)\theta]} \\
+    &= \frac{2\cos (r+1)\theta \sin\theta}{[2 + \sin r\theta][2 + \sin (r + 2)\theta]} \text{ (sum to product formula)} \\
+    &=\frac{2\sin \theta \cos (r+1)\theta}{[2 + \sin r\theta][2 + \sin (r + 2)\theta]}
+\end{align*}
+
+ii)
+\begin{align*}
+    \sum ^n_{r = 1} \frac{\cos (r+1)\theta}{[2 + \sin r\theta][2 + \sin (r + 2)\theta]} &= \frac{1}{2\sin\theta} \sum^n_{r = 1} \frac{2\sin \theta \cos (r+1)\theta}{[2 + \sin r\theta][2 + \sin (r + 2)\theta]} \\
+    &= \frac{1}{2\sin\theta} \sum^n_{r = 1} [f(r) - f(r + 2)] \\
+    &= \frac{1}{2\sin\theta} \left[
+    \begin{array}{c}
+        f(1) - f(3) \\
+        + f(2) - f(4) \\
+        + f(3) - f(5) \\
+        + \dots \\
+        + f(n - 1) - f(n + 1) \\
+        + f(n) - f(n + 2)
+    \end{array}
+    \right] \\
+    &= \frac{1}{2\sin\theta} \left[
+    \begin{array}{c}
+         f(1) + f(2) \\
+         - f(n + 1) - f(n + 2)
+    \end{array}
+    \right] \\
+    &= \frac{1}{2\sin\theta} \left[
+    \begin{array}{c}
+         \frac{1}{2 + \sin \theta} + \frac{1}{2 + \sin 2\theta} \\
+         - \frac{1}{2 + \sin (n + 1)\theta} - \frac{1}{2 + \sin (n + 2)\theta}
+    \end{array}
+    \right]
+\end{align*}
+
+\emph{A straightforward enough question to do with trigonometry and being careful.}
+
+\textbf{\\ Example:}
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $a = -\frac{1}{2}$, given that
+\end{enumerate}
+\begin{align*}
+    \frac{1}{2(n - 1)^2} - \frac{1}{2n^2} = \frac{n + a}{n^2(n + 1)^2}
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item State the smallest possible value of $M$, where $M \in \mathbf{Z}^{+}$ and $M \leq N$, such that $S_N$ can be defined, given that
+\end{enumerate}
+\begin{align*}
+    S_N = \sum_{n = M}^N \frac{2n - 1}{2n^2(n - 1)^2}
+\end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item If $M = 3$, find $S_N$ in terms of $N$
+    \item Deduce that the sum to infinity of the series
+\end{enumerate}
+\begin{align*}
+    \frac{1}{(2)(3)^2} + \frac{1}{(3)(4)^2} + \frac{1}{(4)(5)^2} + \dots < \frac{1}{8}
+\end{align*}
+
+\begin{flushright}
+    [Source: HCI Sequences and Series Supplementary Exercise Q23]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 2.3}
+
+i)
+\begin{align*}
+    \frac{1}{2(n - 1)^2} - \frac{1}{2n^2} &= \frac{n^2 - (n - 1)^2}{2n^2(n - 1)^2} \\
+    &= \frac{2n - 1}{2n^2(n - 1)^2} \\
+    &= \frac{n + (-\frac{1}{2})}{n^2(n - 1)^2}
+\end{align*}
+
+ii)
+Since $M \in \mathbf{Z}^{+}$, we need we need $M > 1$ so that $(n - 1) > 0$. Thus, the smallest possible value of $M = 2$.
+
+\emph{Deduction by common sense. If $M = 1$, the denominator would equal 0}.
+
+iii)
+\begin{align*}
+    S_N &= \sum^N_{n = 3} \frac{2n - 1}{2n^2(n - 1)^2} \\
+    &= \sum^N_{n = 3} \frac{n - \frac{1}{2}}{n^2(n - 1)^2} \\
+    &= \left[
+    \begin{array}{c}
+        \frac{1}{2(2)^2} - \frac{1}{2(3)^2} \\
+        + \frac{1}{2(3)^2} - \frac{1}{2(4)^2} \\
+        + \frac{1}{2(4)^2} - \frac{1}{2(5)^2} \\
+        + \dots \\
+        + \frac{1}{2(N - 2)^2} - \frac{1}{2(N - 1)^2} \\
+        + \frac{1}{2(N - 1)^2} - \frac{1}{2(N)^2} \\
+    \end{array}
+    \right] \\
+    &= \frac{1}{8} - \frac{1}{2(N)^2}
+\end{align*}
+
+iv)
+As $N \rightarrow \infty$, $S_N \rightarrow \frac{1}{8}$.
+\begin{align*}
+    2(3)^2 + 3(4)^2 + 4(5)^2 + \dots &> 2(3)^2 + 2(4)^2 + 2(5)^2 + \dots \\
+    \implies \frac{1}{2(3)^2} + \frac{1}{3(4)^2} + \frac{1}{4(5)^2} + \dots &< \frac{1}{2(3)^2} + \frac{1}{2(4)^2} + \frac{1}{2(5)^2} + \dots \\
+    &= \sum^\infty_{n = 3} \frac{2n - 1}{2n^2(n - 1)^2} \\
+    &= \frac{1}{8}
+\end{align*}
+
+\emph{Useful skill in general: if $X > Y$, then $\frac{1}{X} < \frac{1}{Y}$. Here, we are looking at the individual terms, and this holds true for each term. (eg. $\frac{1}{3(4)^2} \text{ vs } \frac{1}{2(4)^2}$)}
+
+\textbf{\\ Example:}
+
+A bank has an account for investors. Interest is added to the account at the end of each year at a fixed rate of 5\% of the amount in the account at the beginning of that year. A man and a woman both invest money.
+
+\begin{enumerate}[label=(\alph*)]
+    \item The man decides to invest \$$x$ at the beginning of one year then a further \$$x$ at the beginning of the second and each subsequent year. He also decides that he will not draw any money out of the account, but just leave it, and any interest, to build up.
+
+    \begin{enumerate}[label=(\roman*)]
+        \item How much will there be in the account at the end of 1 year, including the interest?
+        \item Show that, at the end of $n$ years, when the interest for the last year has been added, he will have a total of \$$21(1.05^n - 1)x$ in his account.
+        \item After how many complete years will he have, for the first time, at least \$$12x$ in his account?
+    \end{enumerate}
+
+    \item The woman decides that, to assist her in her everyday expenses, she will withdraw the interest as soon as it has been added. She invests \$$y$ at the beginning of each year. Show that at the end of $n$ years, she will have received a total of \$$\frac{1}{40}n(n + 1)y$ in interest.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: HCI Sequences and Series Supplementary Exercise Q3]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Section 2.7}
+
+(a)(i)
+Money after end of 1 year $= x(1.05) = 1.05x$ dollars
+
+\emph{Being careful here is key. 5\% means $1.05$, not $0.05$}
+
+(a)(ii)
+Let the amount of money he has at the end of the $n^{th}$ year be $A(n)$
+\begin{align*}
+    A(1) &= (1.05)x \\
+    A(2) &= (1.05)^2x + (1.05)x \\
+    \dots \\
+    A(n) &= x(1.05 + 1.05^2 + \dots + 1.05^n) \\
+    &= \frac{1.05(1.05^n - 1)}{1.05 - 1}x \\
+    &= 21(1.05^n - 1)x
+\end{align*}
+
+\emph{Standard question.}
+
+(a)(iii)
+Again, let the amount of money he has at the end of the $n^{th}$ year be $A(n)$
+\begin{align*}
+    A(n) &\ge 12x \\
+    21(1.05^n - 1)x &\ge 12x \\
+    1.05^n &\ge 1 + \frac{12}{21} \\
+    n \ln 1.05 &\ge \ln \frac{33}{21} \\
+    n&\ge \frac{\ln \frac{33}{21}}{\ln 1.05} \\
+    n &\ge 9.26385740727
+\end{align*}
+Since $n$ is an integer (with $n$ being the number of years), $n = 10$.
+
+\emph{An alternative approach would be to use the GC to come up with the table of values, as the table of values through the GC generates integer values of n}
+
+(b)
+Let the interest accumulated after the $n^{th}$ year be $I(n)$.
+\begin{align*}
+    I(1) &= 0.05y \\
+    I(2) &= 0.05y + 0.05(2y) \\
+    I(3) &= 0.05y + 0.05(2y) + 0.05(3y) \\
+    \dots \\
+    I(n) &= 0.05y(1 + 2 + 3 + \dots + n) \\
+    &= 0.05y\frac{n(n + 1)}{2} \\
+    &= \frac{1}{40}n(n + 1)y
+\end{align*}
+
+\emph{Again quite straightforward. The main difference here is that this is an arithmetic series.}
+
+
+\subsection{HCI 2021 C1 Promos}
+
+\textbf{\\ Example:}
+
+The sum of the first $n$ terms of a series is given by the expression:
+\begin{align*}
+    e^2 - (-2)^n(e^{2 - n})
+\end{align*}
+\begin{enumerate}[label=(\roman*)]
+    \item State the first term of the series in terms of $e$
+    \item Show that this is a geometric series by finding the $n^{th}$ term of the series.
+    \item Explain why the sum to infinity, $S$, of the sum exists, and determine the exact value of $S$.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: 2021 HCI JC1 Promotional Exams]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 1.2, 2.5.2}
+
+i)
+\begin{align*}
+    \text{First term} &= S_1 \\
+    &= e^2 - (-2)(e^2) \\
+    &= 3e^2
+\end{align*}
+
+ii)
+\begin{align*}
+    n^{th} \text{ term} &= S_n - S_{n - 1} \\
+    &= [e^2 - (-2)^n(e^{2 - n})] - [e^2 - (-2)^{n - 1}(e^{3 - n})] \\
+    &= (-2)^n(e^{2 - n}) + (-2)^{n - 1}({e^{3 - n}}) \\
+    &= (-2)^{n - 1}(e^{2 - n})(e - 2)
+\end{align*}
+To show that $\{u_n\}$ is a geometric series, we need to find the ratio $\frac{u_{n + 1}}{u_n}$, which is the common ratio.
+\begin{align*}
+    \frac{u_{n + 1}}{u_n} &= \frac{(-2)^{n}(e^{1 - n})(e - 2)}{(-2)^{n - 1}(e^{2 - n})(e - 2)} \\
+    &= -\frac{2}{e} \\
+    &= \text{constant (independent of } n \text{)}
+\end{align*}
+Since the first term exists and is non-zero (as shown in part i), and the common ratio is a non-zero constant, the series $\{u_n\}$ is a geometric series.
+
+iii)
+The common ratio of this series is $r = -\frac{2}{e}$, and $|r| < 1$. Thus, the sum to infinity exists. The sum to infinity $S_\infty$ is
+\begin{align*}
+    S_{\infty} &= \frac{a}{1 - r} \\
+    &= \frac{3e^2}{1 - (-\frac{2}{e})} \\
+    &= \frac{3e^3}{e + 2}
+\end{align*}
+
+\emph{Standard question.}
+
+\textbf{\\ Example:}
+
+A couple takes up a housing loan of \$$L$ and the interest is charged before each monthly repayment at a fixed rate of $p\%$ per annum. Their monthly repayment commences on 1 September 2021. Monthly repayments of \$$x$ are due and payable on the first day of subsequent months until their housing loan is fully repaid.
+
+\begin{enumerate}[label=(\roman*)]
+    \item State an expression in terms of $L$ and $p$ for the interest charged before their first repayment on 1 September 2021.
+    \item Show that the outstanding loan at the start of the $n^{th}$ month after their monthly repayment is given by:
+    \begin{align*}
+        (1 + \frac{p}{1200})^nL - \frac{1200x}{p}[(1 + \frac{p}{1200})^n - 1]
+    \end{align*}
+\end{enumerate}
+
+The couple is taking a housing loan of \$504000 at a fixed interest rate of 2.6\% per annum.
+
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Calculate the monthly repayment if the couple plans to repay the loan in 30 years.
+    \item Given that the couple decides to pay monthly repayments of \$4000, find the date at which the couple will be able to fully repay their housing loan and the amount the couple pays for their final monthly payment.
+\end{enumerate}
+
+The couple decides to start adopting a savings plan on 1 September 2021. The couple decides to deposit \$$k$ on 1 September 2021 to the savings plan and for each subsequent month, they will deposit \$$a$ more than the previous month. Each month, the savings plan gives a fixed interest of 0.1\% for the amount deposited for that month. The total amount that the couple will have in the savings plan after $n$ months is given by
+\begin{align*}
+    \sum_{r = 1}^n (450.45 + 50.05r)
+\end{align*}
+
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Find the values of $k$ and $a$
+    \item Assuming that the couple intends to pay monthly repayments of \$4000 for their housing loan, find the least number of months that is needed so that the couple can use the amount in their savings plan to make a one-time payment to fully repay their housing loan.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: 2021 HCI JC1 Promotional Exams]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 2.7}
+
+i)
+\begin{align*}
+    p\% \text{ per annum } &\implies \frac{p}{12}\% \text{ per month } \\
+    \therefore \text{Interest charged } &= (\frac{p}{1200})L \text{ dollars}
+\end{align*}
+
+\emph{Hidden in this question is an assumption, that the interest will be "spread out" evenly across the year, hence $\frac{p}{12}$. There is also the trick of converting \% into $\frac{1}{100}$, which some may miss.}
+
+ii) \\
+Let $O(n)$ be the amount of outstanding loan at the start of the $n^{th}$ month after their monthly repayment.
+\begin{align*}
+    O(1) &= L + \frac{Lp}{1200} - x = L(1 + \frac{p}{1200}) - x \\
+    O(2) &= [L(1 + \frac{p}{1200}) - x](1 + \frac{p}{1200}) - x \\
+    &= L(1 + \frac{p}{1200})^2 - x(1 + \frac{p}{1200}) - x \\
+    O(3) &= [L(1 + \frac{p}{1200})^2 - x(1 + \frac{p}{1200}) - x](1 + \frac{p}{1200}) - x \\
+    &= L(1 + \frac{p}{1200})^3 - x[1 + (1 + \frac{p}{1200}) + (1 + \frac{p}{1200})^2] \\
+    &\dots \\
+    O(n) &= L(1 + \frac{p}{1200})^n - x[1 + (1 + \frac{p}{1200}) + \dots + (1 + \frac{p}{1200})^{n - 1}] \\
+    &= L(1 + \frac{p}{1200})^n - x(\frac{(1 + \frac{p}{1200})^n - 1}{1 + \frac{p}{1200} - 1}) \\
+    &= (1 + \frac{p}{1200})^nL - \frac{1200x}{p}[(1 + \frac{p}{1200})^n - 1]
+\end{align*}
+
+\emph{Building the series by writing out the terms for each month can aid us in seeing a pattern. It also helps since the question already gave us the endpoint we need to work towards, so we can always cross-check against that, or in the worst-case scenario, just use it for subsequent parts.}
+
+iii)
+\begin{align*}
+    \text{30 years } &= \text{ 360 months} \\
+    O(360) &= (1 + \frac{2.6}{1200})^{360}(504000) - \frac{1200x}{2.6}[(1 + \frac{2.6}{1200})^{360} - 1] \\
+    &\leq 0
+\end{align*}
+\begin{align*}
+    \implies \frac{1200x}{2.6}[(1 + \frac{2.6}{1200})^{360} - 1] &\ge (1 + \frac{2.6}{1200})^{360}(504000) \\
+    x &\ge \frac{2.6(1 + \frac{2.6}{1200})^{360}(504000)}{1200[(1 + \frac{2.6}{1200})^{360} - 1]} \\
+    \text{Using the GC, we see that } x \ge 2017.712146 \\
+    \therefore x = 2017.72 \text{ (2dp)}
+\end{align*}
+
+\emph{A tip here is rather than using $=$, using $\ge$ can give us a more accurate representation. We need to pay either exactly or more than the loan amount by the $360^{th}$ month.}
+
+iv)
+\begin{align*}
+    O(n) &= (1 + \frac{2.6}{1200})^n(504000) - \frac{(1200)(4000)}{2.6}[(1 + \frac{2.6}{1200})^n - 1] \\
+    &\leq 0
+\end{align*}
+
+\begin{minipage}{0.4\textwidth} % Adjust the width as needed
+    \begin{tabular}{c|c}
+        n & O(n) \\
+        \hline
+        147 & 1238.6880198 \\
+        \hline
+        148 & -2758.62815626 \\
+    \end{tabular}
+\end{minipage}
+Using the GC, $n = 148$. \\ \\
+Remembering that interest is charged before payment, the final payment can be found by:
+\begin{align*}
+    (1238.6880198)(1 + \frac{2.6}{1200}) = 1241.37 \text{ (2dp)}
+\end{align*}
+
+The couple will finish their repayment on the 148th month (or on 1 December 2033) and will pay \$1241.37 for their last payment.
+
+\emph{You must remember what tricks the question has for you.}
+
+v)
+Let the amount in the savings plan in the $n^{th}$ month be $S(n)$.
+\begin{align*}
+    S(1) &= k(1.001) \\
+    S(2) &= k(1.001) + (k + a)(1.001) \\
+    S(3) &= k(1.001) + (k + a)(1.001) + (k + 2a)(1.001) \\
+    \dots \\
+    S(n) &= 1.001(k + k + a + k + 2a + \dots + k + (n - 1)a) \\
+    &= 1.001 \sum_{r = 1}^{n} [k + (r - 1)a] = 1.001 \sum_{r = 1}^{n} [k - a + ar] \\
+    \text{By comparison, } a &= \frac{50.05}{1.001} = 50 \implies k = \frac{450.45}{1.001} + 50 = 500
+\end{align*}
+
+\emph{Read the question carefully! To which terms does the interest apply?}
+
+vi)
+Assume that in month $n$, the savings account will have enough to repay the rest of the loan.
+Let the housing loan left on month $n$ be $O(n)$, and the savings in the account in month $n$ be $S(n)$.
+
+\begin{align*}
+    O(n) - S(n) &\leq 0 \\
+    \text{where } O(n) &= (1 + \frac{2.6}{1200})^n(504000) - \frac{1200(4000)}{2.6}[(1 + \frac{2.6}{1200})^n - 1] \\
+    \text{and } S(n) &= 450.45n + \frac{50.05n(n + 1)}{2}
+\end{align*}
+
+\begin{minipage}{0.4\textwidth}
+    \begin{tabular}{c|c}
+        n & O(n) \\
+        \hline
+        86 & 3445.11490805 \\
+        \hline
+        87 & -4862.60658799 \\
+    \end{tabular}
+\end{minipage}
+Using the GC, $n = 87$. \\ \\
+Hence, the least number of months needed is 87.
+
+\subsection{HCI 2022 C1 Block Test}
+
+\textbf{\\ Example:}
+
+\begin{enumerate}[label=(\alph*)]
+    \item A non-zero sequence $\{u_n\}$ where $n \ge 1$ and $u_i \neq u_j$ when $i \neq j$ is such that
+    \begin{align*}
+        \frac{1}{u_{n + 1} - u_n}, \frac{1}{2u_{n + 1}}, \frac{1}{u_{n + 1} - u_{n + 2}}
+    \end{align*}
+    are consecutive terms of an arithmetic progression. Show that $\{u_n\}$ forms a geometric progression.
+    \item A geometric series has first term $1$ and common ratio $r$, where $0 < r < 1$. The sum of the first $12$ terms is twice the sum of the terms from the $13^{th}$ term to the $36^{th}$ term (both inclusive). Show that $r^{12} = \frac{1}{2}(\sqrt{3} - 1)$
+\end{enumerate}
+
+\begin{flushright}
+    [Source: HCI 2022 C1 Block Test Q5]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 2.5, 2.6}
+
+a)
+\begin{align*}
+    \frac{1}{2u_{n + 1}} - \frac{1}{u_{n + 1} - u_n} &= -\frac{u_n + u_{n + 1}}{2u_{n + 1}(u_{n + 1} - u_n)} \\
+    \frac{1}{u_{n + 1} - u_{n + 2}} - \frac{1}{2u_{n + 1}} &= \frac{u_{n + 1} + u_{n + 2}}{2u_{n + 1}(u_{n + 1} - u_{n + 2})}
+\end{align*}
+Since the 3 terms are consecutive terms of an arithmetic progression, the above two results must be equal, i.e.
+\begin{align*}
+    -\frac{u_n + u_{n + 1}}{2u_{n + 1}(u_{n + 1} - u_n)} &= \frac{u_{n + 1} + u_{n + 2}}{2u_{n + 1}(u_{n + 1} - u_{n + 2})} \\
+    \frac{u_n + u_{n + 1}}{2u_{n + 1}(u_n - u_{n + 1})} &= \frac{u_{n + 1} + u_{n + 2}}{2u_{n + 1}(u_{n + 1} - u_{n + 2})} \\
+    \frac{u_n + u_{n + 1}}{u_n - u_{n + 1}} &= \frac{u_{n + 1} + u_{n + 2}}{u_{n + 1} - u_{n + 2}} \\
+    (u_n + u_{n + 1})(u_{n + 1} - u_{n + 2}) &= (u_{n + 1} + u_{n + 2})(u_n - u_{n + 1}) \\
+    - u_nu_{n + 2} + (u_{n + 1})^2 &= - (u_{n + 1})^2 + u_nu_{n + 2} \\
+    2(u_{n + 1})^2 &= 2u_nu_{n + 2} \\
+    (u_{n + 1})^2 &= u_nu_{n + 2} \\
+    \frac{u_{n + 1}}{u_n} &= \frac{u_{n + 2}}{u_{n + 1}}
+\end{align*}
+Thus, $\{u_n\}$ is a geometric progression.
+
+\emph{The conclusion above is enough to show a geometric progression. Honestly, the way I solved this problem was to keep trying until something came up. So...}
+
+b)
+Let the $n^{th}$ of the geometric series be $g_n = r^{n - 1}$.
+\begin{align*}
+    \sum^{12}_{k = 1} r^{k - 1} &= 2 \sum^{36}_{k = 13} r^{k - 1} \\
+    \sum^{12}_{k = 1} r^{k - 1} &= 2(\sum^{36}_{k = 1} r^{k - 1} - \sum^{12}_{k = 1} r^{k - 1}) \\
+    3 \sum^{12}_{k = 1} r^{k - 1} &= 2\sum^{36}_{k = 1} r^{k - 1} \\
+    \frac{3(r^{12} - 1)}{r - 1} &= \frac{2(r^{36} - 1)}{r - 1} \\
+    \frac{3(r^{12} - 1)}{r - 1} &= \frac{2[(r^{12})^3 - 1]}{r - 1} \\
+    3(r^{12} - 1) &= 2(r^{12})^3 - 2 \\
+    2(r^{12})^3 - 3r^{12} + 1 &= 0 \\
+    \implies r^{12} &= 1 \text{ or } -\frac{1 + \sqrt{3}}{2} \text{ or } \frac{\sqrt{3} - 1}{2} \\
+    \implies r^{12} &= \frac{\sqrt{3} - 1}{2} \text{ (} \because 0 < r < 1 \text{)}
+\end{align*}
+
+\emph{Comparatively easier compared to the previous part.}
+
+\textbf{\\ Example:}
+
+It is given that
+\begin{align*}
+    u_r = \frac{1}{(r + 2k)!}
+\end{align*}
+where $r \in \mathbf{Z^+}$ and $k$ is a positive constant.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that
+    \begin{align*}
+        u_r - u_{r + 1} = \frac{r + 2k}{(r + 2k + 1)!}
+    \end{align*}
+    \item Hence use the method of differences to find
+    \begin{align*}
+        \sum_{r = 1}^n \frac{r + 2k}{(r + 2k + 1)!}
+    \end{align*}
+    in terms of $n$ and $k$. You need not simplify your answer.
+\end{enumerate}
+Now, let $S_n$ denote the sum of the first $n$ terms of the series.
+\begin{align*}
+        \frac{1}{4(2!)} + \frac{1}{5(3!)} + \frac{1}{6(4!)} + \dots.
+    \end{align*}
+\begin{enumerate}[resume, label=(\roman*)]
+    \item By finding a suitable integer value of $k$ and using the result obtained in part (ii), find $S_n$ in terms of $n$.
+    \item Deduce that $S_n < \frac{1}{6}$ for all $n \in \mathbf{Z^+}$
+    \item Find the least value of $n$ for which $S_n$ is within $10^{-20}$ of the sum to infinity.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: HCI 2022 C1 Block Test Q7]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Sections 2.3}
+
+i)
+\begin{align*}
+    u_r - u_{r + 1} &= \frac{1}{(r + 2k)!} - \frac{1}{(r + 2k + 1)!} \\
+    &= \frac{r + 2k + 1 - r - 2k}{(r + 2k + 1)!} \\
+    &= \frac{r + 2k}{(r + 2k + 1)!}
+\end{align*}
+
+ii)
+\begin{align*}
+    \sum_{r = 1}^n \frac{r + 2k}{(r + 2k + 1)!} &= \sum_{r = 1}^n (u_r - u_{r + 1}) \\
+    &= \left[
+    \begin{array}{c}
+        u_1 - u_2 \\
+        + u_2 - u_3 \\
+        + \dots - \dots \\
+        + u_{n - 1} - u_n \\
+        + u_n - u_{n + 1}
+    \end{array}
+    \right] \\
+    &= u_1 - u_{n + 1} \\
+    &= \frac{1}{(1 + 2k)!} - \frac{1}{(n + 1 + 2k)!}
+\end{align*}
+
+\emph{Straightforward up till this point.}
+
+iii)
+\begin{align*}
+    S_n &= \frac{1}{4(2!)} + \frac{1}{5(3!)} + \frac{1}{6(4!)} + \dots + \frac{1}{(n + 3)(n + 1)!} \\
+    &= \sum_{r = 1}^n \frac{r + 2}{(r + 3)(r + 2)(r + 1)!} \\
+    &= \sum_{r = 1}^n \frac{r + 2}{(r + 3)!} \\
+    &= \sum_{r = 1}^n \frac{r + 2(1)}{(r + 1 + 2(1))!} \\
+    &= \frac{1}{(2(1) + 1)!} - \frac{1}{(n + 2(1) + 1)!} \\
+    &= \frac{1}{6} - \frac{1}{(n + 3)!}
+\end{align*}
+
+iv)
+For all $n \in \mathbf{Z^+}$,
+\begin{align*}
+    \frac{1}{(n + 3)!} &> 0 \\
+    \implies -\frac{1}{(n + 3)!} &< 0 \\
+    \frac{1}{6} - \frac{1}{(n + 3)!} &< \frac{1}{6} \\
+    \therefore S_n &< \frac{1}{6}
+\end{align*}
+
+v)
+\begin{align*}
+    |S_n - S_\infty| \leq 10^{-20} \\
+    \frac{1}{(n + 3)!} \leq 10^{-20} \\
+    \frac{1}{(n + 3)!} - 10^{-20} \leq 0
+\end{align*}
+
+\begin{minipage}{0.4\textwidth}
+    \begin{tabular}{c|c|c}
+        n & $\frac{1}{(n + 3)!} - 10^{-20}$ \\
+        \hline
+        18 & $(9.573)(10^{-21})$ & $> 0$ \\
+        \hline
+        19 & $(9.573)(10^{-21})$ & $< 0$ \\
+        \hline
+        20 & $(9.573)(10^{-21})$ & $< 0$
+    \end{tabular}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+    Using the GC, $n \ge 19$. \\
+    $\therefore$ least value of $n = 19$
+\end{minipage}
+
+\emph{Take note of keywords such as "within" ($\ge$ or $\le$) and "between" ($>$ or $<$)}
+
+\textbf{\\ Example:}
+
+On 31st December 2021, Mei Qian bought a house and took a housing loan of \$$500000$ from a bank that charges interest at $1.8\%$ per year, compounded on the outstanding loan amount on 1st January of each year, starting with the year 2022.
+
+On 15th January 2022, Mei Qian made her first repayment of \$$1800$. On the fifteenth day of each subsequent month, she repaid the loan with a fixed \textbf{monthly} instalment of \$$1800$.
+
+The outstanding loan amount at the end of \textbf{$n$ years} is denoted by \$$L_n$, and $L_1$ is the outstanding loan on 31st December 2022.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Find $L_1$
+    \item Show that $L_n = A - B(1.018)^n$, where $A$ and $B$ are exact constants to be determined.
+    \item Hence determine the least value of $n$ in which Mei Qian repays her loan.
+    \item Find the date in which she made her last repayment and the amount she has to repay.
+\end{enumerate}
+Also on 31st December 2021, Mei Qian signed up for a 35-year investment scheme, GrowSmart, where the payout is made on the tenth day of each month. On 10th January 2022, the first payout is \$$200$. For each of the subsequent months, the payout will be \$$5$ more than the payout in the previous month. In this way, she would receive a payout of \$$205$ on 10th February 2022 and \$$210$ on 10th March 2022.
+
+Mei Qian hoped that the monthly payouts from GrowSmart would one day be able to finance the monthly repayment for the housing loan completely.
+\begin{enumerate}[resume, label=(\roman*)]
+    \item Find the number of months required such that the monthly payout from GrowSmart could finance the monthly repayment for the housing loan completely.
+    \item Find the total amount she received from the payouts over 35 years.
+\end{enumerate}
+
+\begin{flushright}
+    [Source: HCI 2022 C1 Block Test Q11]
+\end{flushright}
+
+\underline{Solution:} \\
+\emph{Required concepts are found in Section 2.7}
+
+i)
+\begin{align*}
+    L_1 = (500000)(1.018) - (1800)(12) = 487400
+\end{align*}
+
+ii)
+\begin{align*}
+    L_2 &= (500000)(1.018^2) - (1800)(12)(1.018) - (1800)(12) \\
+    &\dots \\
+    L_n &= (500000)(1.018^n) - (1800)(12)(1 + 1.018 + 1.018^2 + \dots + 1.018^{n - 1}) \\
+    &= (500000)(1.018^n) - \frac{(1800)(12)(1.018^n - 1)}{1.018 - 1} \\
+    &= (500000)(1.018^n) - (1200000)(1.018^n) + 1200000 \\
+    &= 1200000 - (700000)(1.018^n) \implies A = 1200000; B = 700000
+\end{align*}
+
+\emph{With enough practice this type of question becomes second nature.}
+
+iii)
+\begin{align*}
+    L_n &\leq 0 \\
+    1200000 - (700000)(1.018^n) &\leq 0 \\
+    1.018^n &\ge \frac{1200000}{700000} \\
+    n &\ge \frac{\ln \frac{12}{7}}{\ln 1.018} \\
+    &\ge 30.2129
+\end{align*}
+Thus, least $n = 31$.
+
+\emph{Using the GC is going to be so much easier, and I'd recommend that, but at the point of writing this I have no GC with me so I have to use arithmetic...}
+
+iv)
+When $n = 30$,
+\begin{align*}
+    L_{30} &= 1200000 - 700000(1.018^{30})
+    &= 4550.09997023 \\
+\end{align*}
+At the start of the 31st year, the outstanding loan $O$ is
+\begin{align*}
+    O &= 4550.09997023(1.018) \\
+    &= 4632.00176969 \\
+    \implies \text{ Number of months she paid } &= \lceil \frac{4632.00176969}{1800} \rceil \\
+    &= 3
+\end{align*}
+This means she made her last repayment on 15 March 2052. The value of the last repayment is
+\begin{align*}
+    4632.00176969 - 2(1800) = 1032.00 \text{ (2dp)}
+\end{align*}
+
+\emph{A few layers to dissect, so gotta be careful.}
+
+v)
+Let $u_n$ be the payout received on the 10th of the $n^{th}$ month.
+\begin{align*}
+    u_n &= 200 + 5(n - 1) \\
+    &\ge 1800 \\
+    \implies n &\ge \frac{1800 - 200}{5} + 1 = 321
+\end{align*}
+She therefore requires 321 months.
+
+vi)
+35 years = 420 months.
+\begin{align*}
+    \sum_{n = 1}^{420} [200 + 5(n - 1)] &= \frac{420}{2}[2(200) + 5(420 - 1)] \\
+    &= 523950
+\end{align*}
+
+\section{Last words}
+This took way too long to make (I'm sorry Aurelius), but I hope this material will be useful to whoever stumbles on it. For the purpose of the A Levels Examinations, practice will get you results. But, Cambridge is getting smarter, and they're changing question types faster than we can imitate them. It is therefore more important to understand the concepts and derivations behind each formula and learn how to apply them critically.
+
+\end{document}
